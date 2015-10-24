@@ -1,6 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Codeaddicts.libArgument;
+
+/*
+ * GitHub:
+ * -> https://github.com/splittydev/qolang
+ * 
+ * Specification:
+ * -> https://goo.gl/7KSvUK
+ */
 
 namespace qo
 {
@@ -18,7 +27,7 @@ namespace qo
 			}
 
 			// Check if input is set
-			if (!string.IsNullOrEmpty (options.input) || !options.input_stdin)
+			if (string.IsNullOrEmpty (options.input) && !options.input_stdin)
 				options.help = true;
 
 			// Print help if requested
@@ -27,6 +36,39 @@ namespace qo
 				ArgumentParser.Help ();
 				return;
 			}
+
+			string source = string.Empty;
+
+			// Check if source should be read from file
+			if (!string.IsNullOrEmpty (options.input)) {
+
+				// Check if file exists
+				if (!File.Exists (options.input)) {
+					Console.Error.WriteLine ("File not found: {0}", options.input);
+					return;
+				}
+
+				// Read source from file
+				source = File.ReadAllText (options.input);
+			}
+
+			// Check if source should be read from stdin
+			if (options.input_stdin) {
+
+				Console.WriteLine ("Reading source...");
+
+				// Read source from stdin
+				var stdin = Console.OpenStandardInput ();
+				using (var reader = new StreamReader (stdin)) {
+					source = reader.ReadToEnd ();
+				}
+			}
+
+			// Interpret source
+			Interpreter
+				.GrabNew (options.MemorySize, options.StackSize)
+				.Feed (source)
+				.Interpret ();
 		}
 
 		static void PrintVersion () {
