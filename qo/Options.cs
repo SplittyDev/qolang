@@ -9,20 +9,52 @@ namespace qo
 		public const int DEFAULT_STACK_SIZE = 64;
 
 		[Docs ("Input file")]
-		[Argument ("-i", "/i")]
+		#if WINDOWS
+		[Argument ("/i")]
+		#else
+		[Argument ("-i")]
+		#endif
 		public string input;
 
 		[Docs ("Read input from stdin")]
-		[Switch ("--stdin", "/stdin")]
+		#if WINDOWS
+		[Switch ("/stdin")]
+		#else
+		[Switch ("--stdin")]
+		#endif
 		public bool input_stdin;
 
 		[Docs ("Memory size in bytes")]
-		[Argument ("-m", "--mem", "/mem")]
+		#if WINDOWS
+		[Argument ("/mem")]
+		#else
+		[Argument ("--mem")]
+		#endif
 		public string memsz;
 
 		[Docs ("Stack size in bytes")]
-		[Argument ("-s", "--stack", "/stack")]
+		#if WINDOWS
+		[Argument ("/stack")]
+		#else
+		[Argument ("--stack")]
+		#endif
 		public string stacksz;
+
+		[Docs ("Show this help")]
+		#if WINDOWS
+		[Switch ("/?")]
+		#else
+		[Switch ("-h", "--help")]
+		#endif
+		public bool help;
+
+		[Docs ("Show version")]
+		#if WINDOWS
+		[Switch ("/v", "/version")]
+		#else
+		[Switch ("-v", "--version")]
+		#endif
+		public bool version;
 
 		/// <summary>
 		/// Gets the size of the memory.
