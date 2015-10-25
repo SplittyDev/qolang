@@ -54,14 +54,25 @@ namespace qo
 
 			// Check if source should be read from stdin
 			if (options.input_stdin) {
-
-				Console.WriteLine ("Reading source...");
-
+				
 				// Read source from stdin
 				var stdin = Console.OpenStandardInput ();
 				using (var reader = new StreamReader (stdin)) {
 					source = reader.ReadToEnd ();
 				}
+			}
+
+			// Check if source should be minified
+			if (options.minify) {
+
+				// Minify source
+				source = Minifier
+					.GrabNew ()
+					.Feed (source)
+					.Minify ();
+
+				Console.WriteLine (source);
+				return;
 			}
 
 			// Interpret source

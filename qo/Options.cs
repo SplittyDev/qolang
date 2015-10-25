@@ -64,6 +64,14 @@ namespace qo
 		#endif
 		public bool wrap;
 
+		[Docs ("Minify code")]
+		#if WINDOWS
+		[Switch ("/minify")]
+		#else
+		[Switch ("--minify")]
+		#endif
+		public bool minify;
+
 		/// <summary>
 		/// Gets the size of the memory.
 		/// </summary>
