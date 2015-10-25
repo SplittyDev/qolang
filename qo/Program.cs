@@ -4,9 +4,6 @@ using System.Reflection;
 using Codeaddicts.libArgument;
 
 /*
- * GitHub:
- * -> https://github.com/splittydev/qolang
- * 
  * Specification:
  * -> https://goo.gl/7KSvUK
  */
