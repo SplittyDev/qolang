@@ -68,6 +68,7 @@ namespace qo
 			Interpreter
 				.GrabNew (options.MemorySize, options.StackSize)
 				.Feed (source)
+				.Wrap (options.wrap)
 				.Interpret ();
 		}
 

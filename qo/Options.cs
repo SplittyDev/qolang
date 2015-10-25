@@ -6,7 +6,7 @@ namespace qo
 	public class Options
 	{
 		public const int DEFAULT_MEMORY_SIZE = 30000;
-		public const int DEFAULT_STACK_SIZE = 30000;
+		public const int DEFAULT_STACK_SIZE = 512;
 
 		[Docs ("Input file")]
 		#if WINDOWS
@@ -55,6 +55,14 @@ namespace qo
 		[Switch ("-v", "--version")]
 		#endif
 		public bool version;
+
+		[Docs ("Wrap cells (default off)")]
+		#if WINDOWS
+		[Switch ("/wrap")]
+		#else
+		[Switch ("--wrap")]
+		#endif
+		public bool wrap;
 
 		/// <summary>
 		/// Gets the size of the memory.

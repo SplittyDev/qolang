@@ -8,13 +8,14 @@ namespace qo
 	public class Interpreter
 	{
 		readonly string ALLOWED_ASCII_CHARS =
-			"abcdefghijklmnopqrstuvwxyzABCEFGHIJKLMNOPQRSTUVWXYZ1234567890?!";
+			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890?!";
 
 		readonly int[] mem;
 		readonly Stack<int> stack;
 
 		string source;
 		int pos, memptr;
+		bool wrap;
 
 		public Interpreter (int memsz, int stacksz) {
 			mem = new int[memsz];
@@ -32,6 +33,11 @@ namespace qo
 			return this;
 		}
 
+		public Interpreter Wrap (bool wrap) {
+			this.wrap = wrap;
+			return this;
+		}
+
 		public void Interpret () {
 			
 			// Iterate over the source string
@@ -40,9 +46,13 @@ namespace qo
 				switch (source [pos]) {
 				case '>':
 					memptr++;
+					if (wrap && memptr >= mem.Length)
+						memptr = 0;
 					break;
 				case '<':
 					memptr--;
+					if (wrap && memptr < 0)
+						memptr = mem.Length - 1;
 					break;
 				case '+':
 					mem [memptr]++;
