@@ -67,7 +67,7 @@ namespace qo
 					mem [memptr] >>= 1;
 					break;
 				case '^':
-					memptr = 0;
+					memptr = stack.Pop ();
 					break;
 				case '#':
 					mem [memptr] = stack.Count;
@@ -86,9 +86,6 @@ namespace qo
 					break;
 				case '&':
 					stack.Push (stack.Peek ());
-					break;
-				case '|':
-					stack.Pop ();
 					break;
 				case '\\':
 					int elem1 = stack.Pop ();
@@ -126,11 +123,14 @@ namespace qo
 					stack.Clear ();
 					collection.ForEach (stack.Push);
 					break;
-				case '_':
-					mem [memptr] = pos;
+				case '%':
+					mem [memptr] = pos + 1;
 					break;
 				case '$':
 					pos = mem [memptr];
+					continue;
+				case '_':
+					mem [memptr] = source.Length;
 					break;
 				default:
 					if ((int)source [pos] <= 0xFF
