@@ -67,7 +67,7 @@ namespace qo
 					mem [memptr] >>= 1;
 					break;
 				case '^':
-					mem [memptr] *= stack.Pop ();
+					memptr = 0;
 					break;
 				case '#':
 					mem [memptr] = stack.Count;
