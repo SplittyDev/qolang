@@ -7,7 +7,7 @@ namespace qo
 {
 	public class Interpreter
 	{
-		readonly string ALLOWED_ASCII_CHARS =
+		const string ALLOWED_ASCII_CHARS =
 			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890?!";
 
 		readonly int[] mem;
