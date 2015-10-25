@@ -5,8 +5,8 @@ namespace qo
 {
 	public class Options
 	{
-		public const int DEFAULT_MEMORY_SIZE = 512;
-		public const int DEFAULT_STACK_SIZE = 64;
+		public const int DEFAULT_MEMORY_SIZE = 30000;
+		public const int DEFAULT_STACK_SIZE = 30000;
 
 		[Docs ("Input file")]
 		#if WINDOWS
