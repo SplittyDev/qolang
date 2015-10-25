@@ -1,0 +1,20 @@
+''''''''''''''''' Prepare uppercase letters
+A;				' Initialize cell #0 to 65 (== 'A')
+
+''''''''''''''''' Prepare routine jump
+>>>%			' Set cell #3 to the location of the routine
+
+''''''''''''''''' Routine to print 26 letters
+:[-]:\;^		' Switch to cell #0 without side effects
+>[-]++****------' Set cell #1 to 26
+[ <.+>- ]		' Print the next char while #1 is not 0
+>[;$]<			' Jump to location on stack if cell #2 is not 0
+
+''''''''''''''''' Prepare lowercase letters
+:[-]:\;^[-]		' Switch to cell #0 and clear it
+a;				' Set cell #0 to 97 (== 'a')
+
+''''''''''''''''' Call the print routine
+>>+				' Set cell #2 to 1
+:_:\;			' Push end of file without side effects
+>$				' Jump to the print routine
