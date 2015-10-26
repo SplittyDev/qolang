@@ -68,12 +68,6 @@ namespace qo
 				case '/':
 					mem [memptr] >>= 1;
 					break;
-				case '^':
-					memptr = stack.Pop ();
-					break;
-				case '#':
-					mem [memptr] = stack.Count;
-					break;
 				case '.':
 					Console.Write (Convert.ToChar (mem [memptr]));
 					break;
@@ -83,17 +77,51 @@ namespace qo
 				case ':':
 					stack.Push (mem [memptr]);
 					break;
-				case ';':
-					mem [memptr] = stack.Pop ();
-					break;
 				case '&':
 					stack.Push (stack.Peek ());
 					break;
+				case '^':
+					memptr = stack.Pop ();
+					break;
+				case '#':
+					mem [memptr] = stack.Count;
+					break;
+				case ';':
+					mem [memptr] = stack.Pop ();
+					break;
 				case '\\':
-					int elem1 = stack.Pop ();
-					int elem2 = stack.Pop ();
-					stack.Push (elem1);
-					stack.Push (elem2);
+					{
+						int elem1 = stack.Pop ();
+						int elem2 = stack.Pop ();
+						stack.Push (elem1);
+						stack.Push (elem2);
+						break;
+					}
+				case '=':
+					{
+						int elem1 = stack.Pop ();
+						int elem2 = stack.Pop ();
+						mem [memptr] = elem1 == elem2 ? 1 : 0;
+						break;
+					}
+				case '@':
+					var collection = stack.ToList ();
+					stack.Clear ();
+					collection.ForEach (stack.Push);
+					break;
+				case '%':
+					mem [memptr] = pos + 1;
+					break;
+				case '$':
+					pos = mem [memptr];
+					continue;
+				case '_':
+					mem [memptr] = source.Length;
+					break;
+				case '\'':
+					while (source [pos] != '\n'
+						&& pos < source.Length - 1)
+						pos++;
 					break;
 				case '[':
 					if (mem [memptr] == 0)
@@ -114,25 +142,6 @@ namespace qo
 					if (stack.Peek () != 0)
 						while (source [pos] != '(')
 							pos--;
-					break;
-				case '\'':
-					while (source [pos] != '\n'
-						&& pos < source.Length - 1)
-						pos++;
-					break;
-				case '@':
-					var collection = stack.ToList ();
-					stack.Clear ();
-					collection.ForEach (stack.Push);
-					break;
-				case '%':
-					mem [memptr] = pos + 1;
-					break;
-				case '$':
-					pos = mem [memptr];
-					continue;
-				case '_':
-					mem [memptr] = source.Length;
 					break;
 				default:
 					if ((int)source [pos] <= 0xFF
