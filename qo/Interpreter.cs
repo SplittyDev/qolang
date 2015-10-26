@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,8 +13,7 @@ namespace qo
 
 		readonly int[] mem;
 		readonly Stack<int> stack;
-		readonly Stack<int> loopstack;
-		readonly Dictionary<int, int> jumptable;
+		readonly SortedList<int, int> jumptable;
 		bool jumptablebuilt;
 
 		string source;
@@ -27,8 +25,7 @@ namespace qo
 			for (var i = 0; i < mem.Length; i++)
 				mem [i] = 0;
 			stack = new Stack<int> (stacksz);
-			loopstack = new Stack<int> ();
-			jumptable = new Dictionary<int, int> ();
+			jumptable = new SortedList<int, int> ();
 		}
 
 		public static Interpreter GrabNew (int memsz, int stacksz) {
@@ -58,6 +55,7 @@ namespace qo
 		}
 
 		public bool BuildJumpTable () {
+			var loopstack = new Stack<int> ();
 			for (var i = 0; i < source.Length; i++) {
 				switch (source [i]) {
 				case '[':
