@@ -16,14 +16,6 @@ namespace qo
 		#endif
 		public string input;
 
-		[Docs ("Read input from stdin")]
-		#if WINDOWS
-		[Switch ("/stdin")]
-		#else
-		[Switch ("--stdin")]
-		#endif
-		public bool input_stdin;
-
 		[Docs ("Memory size in bytes")]
 		#if WINDOWS
 		[Argument ("/mem")]

@@ -14,6 +14,9 @@ namespace qo
 
 		readonly int[] mem;
 		readonly Stack<int> stack;
+		readonly Stack<int> loopstack;
+		readonly Dictionary<int, int> jumptable;
+		bool jumptablebuilt;
 
 		string source;
 		int pos, memptr;
@@ -24,6 +27,8 @@ namespace qo
 			for (var i = 0; i < mem.Length; i++)
 				mem [i] = 0;
 			stack = new Stack<int> (stacksz);
+			loopstack = new Stack<int> ();
+			jumptable = new Dictionary<int, int> ();
 		}
 
 		public static Interpreter GrabNew (int memsz, int stacksz) {
@@ -41,9 +46,54 @@ namespace qo
 		}
 
 		public void Interpret () {
+
+			if (!BuildJumpTable ()) {
+				Console.WriteLine ("[ERROR] Couldn't build jump table.");
+				return;
+			}
+
+			// Interpret source
+			while (InterpretOne ()) {
+			}
+		}
+
+		public bool BuildJumpTable () {
+			for (var i = 0; i < source.Length; i++) {
+				switch (source [i]) {
+				case '[':
+				case '(':
+					loopstack.Push (i);
+					break;
+				case ']':
+				case ')':
+					if (loopstack.Count == 0) {
+						Console.Error.WriteLine ("[ERROR] Unmatched ']' at position {0}", i);
+						return false;
+					} else {
+						var opening = loopstack.Pop ();
+						jumptable.Add (opening, i);
+						jumptable.Add (i, opening);
+					}
+					break;
+				}
+			}
+			if (loopstack.Count > 0) {
+				Console.Error.WriteLine ("[ERROR] Unmatched '[' at position {0}", loopstack.Pop ());
+				return false;
+			}
+			jumptablebuilt = true;
+			return true;
+		}
+
+		public bool InterpretOne () {
+
+			if (!jumptablebuilt) {
+				Console.Error.WriteLine ("[ERROR] You need to build the jump table!");
+				Console.Error.WriteLine ("[ERROR] Call BuildJumptable before calling Interpret.");
+				return false;
+			}
 			
-			// Iterate over the source string
-			while (pos < source.Length) {
+			if (pos < source.Length) {
 
 				switch (source [pos]) {
 				case '>':
@@ -114,7 +164,7 @@ namespace qo
 					break;
 				case '$':
 					pos = mem [memptr];
-					continue;
+					return true;
 				case '_':
 					mem [memptr] = source.Length;
 					break;
@@ -125,35 +175,33 @@ namespace qo
 					break;
 				case '[':
 					if (mem [memptr] == 0)
-						while (source [pos] != ']')
-							pos++;
+						pos = jumptable [pos];
 					break;
 				case ']':
 					if (mem [memptr] != 0)
-						while (source [pos] != '[')
-							pos--;
+						pos = jumptable [pos];
 					break;
 				case '(':
 					if (stack.Peek () == 0)
-						while (source [pos] != ')')
-							pos++;
+						pos = jumptable [pos];
 					break;
 				case ')':
 					if (stack.Peek () != 0)
-						while (source [pos] != '(')
-							pos--;
+						pos = jumptable [pos];
 					break;
 				default:
 					if ((int)source [pos] <= 0xFF
-						&& ALLOWED_ASCII_CHARS.Contains (source [pos].ToString ())) {
+					    && ALLOWED_ASCII_CHARS.Contains (source [pos].ToString ())) {
 						stack.Push ((int)source [pos]);
 					}
 					pos++;
-					continue;
+					return true;
 				}
 
 				pos++;
+				return true;
 			}
+			return false;
 		}
 	}
 }

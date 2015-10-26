@@ -23,10 +23,6 @@ namespace qo
 				return;
 			}
 
-			// Check if input is set
-			if (string.IsNullOrEmpty (options.input) && !options.input_stdin)
-				options.help = true;
-
 			// Print help if requested
 			if (options.help) {
 				PrintVersion ();
@@ -49,8 +45,8 @@ namespace qo
 				source = File.ReadAllText (options.input);
 			}
 
-			// Check if source should be read from stdin
-			if (options.input_stdin) {
+			// Read from stdin if no file is given
+			if (string.IsNullOrEmpty (options.input)) {
 				
 				// Read source from stdin
 				var stdin = Console.OpenStandardInput ();
