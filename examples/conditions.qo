@@ -1,0 +1,15 @@
+''''''''''''''''''''' Print "2 equals 2: "
+++****				' Set cell #0 to space char
+>++*****------<		' Set cell #1 to colon char
+2:equals:2>:<:		' Push 2 equals 2:
+>[-]:<				' Set cell #1 back to 0 and push ascii NUL
+@;[.;]@				' Print stack contents
+
+''''''''''''''''''''' Print true, if 2 == 2, false otherwise
+[-]++::				' Clear cell #0 and push 2 two times
+=					' Compare two top values on stack
+[ true->:< ]		' Push true and ascii NUL if 2 == 2
+false>:<			' Push false and ascii NUL
+@;[.;]@				' Print first string on stack
+++**++.				' Print newline char
+#[>;[-]<-]			' Clear the stack

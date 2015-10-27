@@ -152,10 +152,15 @@ namespace qo
 						mem [memptr] = elem1 == elem2 ? 1 : 0;
 						break;
 					}
+				/* Removed that language feature
 				case '"':
 					var _stack = stack.Reverse ().ToArray ();
-					var start = _stack.First (x => x == 0);
+					var start = _stack.FirstOrDefault (x => x == 0);
 					var stop = stack.Count - start - 1;
+					if (stop < 0) {
+						Console.Error.WriteLine ("[ERROR] Not enough elements on stack.");
+						return false;
+					}
 					var spos = start;
 					while (spos < stop) {
 						stack.Pop ();
@@ -163,6 +168,7 @@ namespace qo
 					}
 					stack.Pop ();
 					break;
+				*/
 				case '@':
 					var collection = stack.ToList ();
 					stack.Clear ();
