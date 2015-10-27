@@ -9,7 +9,7 @@ namespace qo
 		const string ALLOWED_ASCII_CHARS =
 			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890?!";
 		
-		public const string SYMBOLS = "><+-*/.,:;[]()&\\^#@%$_" + ALLOWED_ASCII_CHARS;
+		public const string SYMBOLS = "><+-*/.,:;[]()&\\^#@%$_\"" + ALLOWED_ASCII_CHARS;
 
 		readonly int[] mem;
 		readonly Stack<int> stack;
@@ -87,7 +87,7 @@ namespace qo
 
 			if (!jumptablebuilt) {
 				Console.Error.WriteLine ("[ERROR] You need to build the jump table!");
-				Console.Error.WriteLine ("[ERROR] Call BuildJumptable before calling Interpret.");
+				Console.Error.WriteLine ("[ERROR] Call BuildJumpTable before calling Interpret.");
 				return false;
 			}
 			
@@ -152,6 +152,17 @@ namespace qo
 						mem [memptr] = elem1 == elem2 ? 1 : 0;
 						break;
 					}
+				case '"':
+					var _stack = stack.Reverse ().ToArray ();
+					var start = _stack.First (x => x == 0);
+					var stop = stack.Count - start - 1;
+					var spos = start;
+					while (spos < stop) {
+						stack.Pop ();
+						Console.Write (Convert.ToChar (_stack.ElementAt (spos++)));
+					}
+					stack.Pop ();
+					break;
 				case '@':
 					var collection = stack.ToList ();
 					stack.Clear ();

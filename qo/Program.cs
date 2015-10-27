@@ -55,6 +55,13 @@ namespace qo
 				}
 			}
 
+			// Check if qo code should be built from a string
+			if (options.qoify) {
+				source = source.ToQo ();
+				Console.WriteLine (source);
+				return;
+			}
+
 			// Check if source should be minified
 			if (options.minify) {
 

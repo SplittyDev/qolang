@@ -57,6 +57,7 @@
     <Compile Include="Options.cs" />
     <Compile Include="Interpreter.cs" />
     <Compile Include="Minifier.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
