@@ -3,7 +3,7 @@ Hello		' push 'H' 'e' 'l' 'l' 'o' on the stack
 world!		' push 'w' 'o' 'r' 'l' 'd' on the stack
 //++:		' push newline char on the stack (0xC)
 >:			' push ascii NUL char on the stack
-"			' print string
+@;[.;]@		' print string
 
 '			' old code for printing a string
 '@			' reverse the stack contents
