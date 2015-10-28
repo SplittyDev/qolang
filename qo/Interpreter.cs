@@ -9,7 +9,7 @@ namespace qo
 		const string ALLOWED_ASCII_CHARS =
 			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890?!";
 		
-		public const string SYMBOLS = "><+-*/.,:;[]()&\\^#@%$_\"" + ALLOWED_ASCII_CHARS;
+		public const string SYMBOLS = "><+-*/.,:;[]()&\\^#@%$_" + ALLOWED_ASCII_CHARS;
 
 		readonly int[] mem;
 		readonly Stack<int> stack;
