@@ -1,13 +1,16 @@
 #Autosave files
 *~
 
+#playground
+[Pp]layground/
+
 #build
 [Oo]bj/
 [Bb]in/
 packages/
 TestResults/
 
-# globs
+#globs
 Makefile.in
 *.DS_Store
 *.sln.cache

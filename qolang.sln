@@ -3,21 +3,41 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qo", "qo\qo.csproj", "{A2A6B788-06CA-4A98-B915-B0DC7DA34774}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libqo", "libqo\libqo.csproj", "{9050E8AB-A567-4E14-A913-27EE3615DF4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Cross)|x86 = Debug (Cross)|x86
 		Release (Cross)|x86 = Release (Cross)|x86
 		Debug (Windows)|x86 = Debug (Windows)|x86
 		Release (Windows)|x86 = Release (Windows)|x86
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Debug (Cross)|x86.ActiveCfg = Debug|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Debug (Cross)|x86.Build.0 = Debug|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Debug (Windows)|x86.ActiveCfg = Debug|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Debug (Windows)|x86.Build.0 = Debug|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Release (Cross)|x86.ActiveCfg = Release|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Release (Cross)|x86.Build.0 = Release|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Release (Windows)|x86.ActiveCfg = Release|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Release (Windows)|x86.Build.0 = Release|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9050E8AB-A567-4E14-A913-27EE3615DF4D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Debug (Cross)|x86.ActiveCfg = Debug (Cross)|x86
 		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Debug (Cross)|x86.Build.0 = Debug (Cross)|x86
 		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Debug (Windows)|x86.ActiveCfg = Debug (Windows)|x86
 		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Debug (Windows)|x86.Build.0 = Debug (Windows)|x86
+		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Debug|Any CPU.ActiveCfg = Debug (Cross)|x86
+		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Debug|Any CPU.Build.0 = Debug (Cross)|x86
 		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Release (Cross)|x86.ActiveCfg = Release (Cross)|x86
 		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Release (Cross)|x86.Build.0 = Release (Cross)|x86
 		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Release (Windows)|x86.ActiveCfg = Release (Windows)|x86
 		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Release (Windows)|x86.Build.0 = Release (Windows)|x86
+		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Release|Any CPU.ActiveCfg = Debug (Cross)|x86
+		{A2A6B788-06CA-4A98-B915-B0DC7DA34774}.Release|Any CPU.Build.0 = Debug (Cross)|x86
 	EndGlobalSection
 EndGlobal

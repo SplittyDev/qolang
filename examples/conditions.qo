@@ -1,27 +1,14 @@
-++****              ' Set cell #0 to space char
->++*****------<     ' Set cell #1 to colon char
-2:equals:2>:<:      ' Push 2 equals 2:
->[-]:<              ' Set cell #1 back to 0 and push ascii NUL
-@;[.;]@             ' Print stack contents
-
-[-]++::             ' Clear cell #0 and push 2 two times
-=                   ' Compare top two values on stack
-[ true->:< ]        ' Push true and ascii NUL if 2 == 2
-false>:<            ' Push false and ascii NUL
-@;[.;]@             ' Print first string on stack
-++**++.             ' Print newline char
-:@#-[>:\;;<-];      ' Clear the stack
-
-[-]++****           ' Set cell #0 to space char
->[-]++*****------<  ' Set cell #1 to colon char
-2:equals:3>:<:      ' Push 2 equals 2:
->[-]:<              ' Set cell #1 back to 0 and push ascii NUL
-@;[.;]@             ' Print stack contents
-
-[-]++:&;+:          ' Clear cell #0 and push 2 and 3
-=                   ' Compare top two values on stack
-[ true->:< ]        ' Push true and ascii NUL if 2 == 2
-false>:<            ' Push false and ascii NUL
-@;[.;]@             ' Print first string on stack
-++**++.             ' Print newline char
-:@#-[>:\;;<-];      ' Clear the stack
+"2 equals 2: \0"        ' Push "2 equals 2: "
+:#[;@:\;[.\;];@:[-]];   ' Print first string onto the stack
+>++::[-]<               ' Push 2 two times
+=["true\0"-]            ' Push "true\0" if 2 == 2
+"false\0"               ' Push "false\0"
+:#[;@:\;[.\;];@:[-]];   ' Print first string on stack
+@:@"\n";.@;@            ' Print newline character
+:@#-[>:\;;<-];          ' Clear stack
+"2 equals 3: \0"        ' Push "2 equals 3: "
+:#[;@:\;[.\;];@:[-]];   ' Print first string on stack
+>++:&;+:[-]<            ' Push 2 and 3 onto the stack
+=["true\0"-]            ' Push "true\0" if 2 == 3
+"false\0"               ' Push "false\0"
+:#[;@:\;[.\;];@:[-]];   ' Print first string on stack

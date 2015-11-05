@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Text;
 
-namespace qo
+namespace libqo
 {
 	public class Minifier
 	{
 		string source;
 		int pos;
-
-		public Minifier () {
-		}
 
 		public static Minifier GrabNew () {
 			return new Minifier ();
@@ -24,8 +21,7 @@ namespace qo
 			var accum = new StringBuilder ();
 			while (pos < source.Length) {
 				if (source [pos] == '\'') {
-					while (pos < source.Length && source [pos] != '\n')
-						pos++;
+					while (pos < source.Length && source [pos++] != '\n') { }
 					continue;
 				}
 				if (Interpreter.SYMBOLS.Contains (source [pos].ToString ()))

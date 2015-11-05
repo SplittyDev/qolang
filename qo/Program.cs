@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using Codeaddicts.libArgument;
+using libqo;
 
 /*
  * Specification:
@@ -53,13 +54,6 @@ namespace qo
 				using (var reader = new StreamReader (stdin)) {
 					source = reader.ReadToEnd ();
 				}
-			}
-
-			// Check if qo code should be built from a string
-			if (options.qoify) {
-				source = source.ToQo ();
-				Console.WriteLine (source);
-				return;
 			}
 
 			// Check if source should be minified

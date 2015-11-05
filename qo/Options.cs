@@ -64,14 +64,6 @@ namespace qo
 		#endif
 		public bool minify;
 
-		[Docs ("Convert a string to qo code")]
-		#if WINDOWS
-		[Switch ("/qoify")]
-		#else
-		[Switch ("--qoify")]
-		#endif
-		public bool qoify;
-
 		/// <summary>
 		/// Gets the size of the memory.
 		/// </summary>
