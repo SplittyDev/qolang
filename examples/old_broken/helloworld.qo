@@ -1,0 +1,14 @@
+"Hello       ' push 'H' 'e' 'l' 'l' 'o' on the stack
+++****:     ' push a space char on the stack (0x20)
+world!      ' push 'w' 'o' 'r' 'l' 'd' on the stack
+//++:       ' push newline char on the stack (0xC)
+>:          ' push ascii NUL char on the stack
+@;[.;]@     ' print string
+
+'           ' old code for printing a string
+'@          ' reverse the stack contents
+'#          ' count the elements on the stack
+'[          ' loop until cell value is 0
+'   >;.     ' switch to another cell, pop a letter and print it
+'   <-      ' switch to the counter cell and decrement its value
+']          ' end loop"

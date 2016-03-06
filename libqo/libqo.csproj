@@ -37,6 +37,8 @@
     <Compile Include="QoScriptHost.cs" />
     <Compile Include="QoState.cs" />
     <Compile Include="QoDebugMessage.cs" />
+    <Compile Include="ArrayExtensions.cs" />
+    <Compile Include="QoFunction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

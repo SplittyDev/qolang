@@ -1,5 +1,5 @@
 "2 equals 2: \0"        ' Push "2 equals 2: "
-:#[;@:\;[.\;];@:[-]];   ' Print first string onto the stack
+:#[;@:\;[.\;];@:[-]];   ' Print first string on stack
 >++::[-]<               ' Push 2 two times
 =["true\0"-]            ' Push "true\0" if 2 == 2
 "false\0"               ' Push "false\0"

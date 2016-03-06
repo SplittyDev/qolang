@@ -18,6 +18,10 @@ namespace libqo
 		}
 
 		public string Minify () {
+
+			// Broken.
+			return source;
+
 			var accum = new StringBuilder ();
 			while (pos < source.Length) {
 				if (source [pos] == '\'') {
