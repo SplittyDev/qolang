@@ -30,12 +30,6 @@ namespace libqo {
 		public QoState Interpret (string code,
 			int tapeSize = RECOMMENDED_TAPE_SIZE,
 			int stackSize = RECOMMENDED_STACK_SIZE) {
-			/*
-			var newcode = Minifier
-				.GrabNew ()
-				.Feed (code)
-				.Minify ();
-			*/
 			var interpreter = Interpreter
 				.GrabHosted (tapeSize, stackSize)
 				.FeedInput (Input)

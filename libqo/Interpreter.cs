@@ -202,12 +202,11 @@ namespace libqo
 		/// <param name="throwIfOutOfRange">If set to <c>true</c> throw if out of range.</param>
 		public int GetCellValue (int cell, bool throwIfOutOfRange = true) {
 			const string msg = "Cell must be greater than zero and less than the maximum cell length.";
-			if (cell < 0 || cell > mem.Length)
-			if (throwIfOutOfRange)
-				throw new ArgumentOutOfRangeException (cell.ToString (), msg);
-			else
-				return 0;
-			return mem [cell];
+		    if (cell >= 0 && cell <= mem.Length)
+		        return mem[cell];
+		    if (throwIfOutOfRange)
+		        throw new ArgumentOutOfRangeException (cell.ToString (), msg);
+		    return 0;
 		}
 
 		/// <summary>
@@ -501,27 +500,28 @@ namespace libqo
 						pos = jumptable [pos];
 					break;
 				case '"':
+				    var chars = new List<int> ();
 					pos++;
 					while (source [pos] != '"') {
-						char chr = Convert.ToChar (source [pos++]);
+						var chr = Convert.ToChar (source [pos++]);
 						switch (chr) {
 						case '\\':
-							char next = Convert.ToChar (source [pos++]);
+							var next = Convert.ToChar (source [pos++]);
 							switch (next) {
 							case 'a':
-								stack.Push ('\a');
+								chars.Add ('\a');
 								break;
 							case 't':
-								stack.Push ('\t');
+								chars.Add ('\t');
 								break;
 							case 'n':
-								stack.Push ('\n');
+								chars.Add ('\n');
 								break;
 							case 'r':
-								stack.Push ('\r');
+								chars.Add ('\r');
 								break;
 							case '0':
-								stack.Push (0);
+								chars.Add (0);
 								break;
 							default:
 								Error ("Invalid escape sequence: \\{0}", next);
@@ -529,10 +529,12 @@ namespace libqo
 							}
 							break;
 						default:
-							stack.Push (chr);
+							chars.Add (chr);
 							break;
 						}
 					}
+				    foreach (var chr in chars.Reverse<int> ())
+				        stack.Push (chr);
 					break;
 				case 'c':
 					numbermode = NumberMode.Char;
